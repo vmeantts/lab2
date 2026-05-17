@@ -1,0 +1,82 @@
+﻿#include <iostream>
+#include "Stock.h"
+
+using namespace std;
+
+int main()
+{
+    setlocale(LC_ALL, "RU");
+
+    Stock stock;
+
+    int choice;
+    int w;
+    int v;
+    int result;
+
+    do
+    {
+        cout << "\n1 - добавить коробку";
+        cout << "\n2 - выдать по грузоподъемности";
+        cout << "\n3 - выдать по объему";
+        cout << "\n0 - выход";
+        cout << "\nваш выбор: ";
+        cin >> choice;
+
+        switch (choice)
+        {
+        case 1:
+            cout << "введите грузоподъемность и объем: ";
+            cin >> w >> v;
+
+            if (w < 0 || v < 0)
+            {
+                cout << "ошибка.\n";
+            }
+            else
+            {
+                stock.Add(w, v);
+                cout << "коробка добавлена.\n";
+            }
+
+            break;
+
+        case 2:
+            cout << "введите минимальную грузоподъемность: ";
+            cin >> w;
+
+            result = stock.GetByW(w);
+
+            if (result == -1)
+            {
+                cout << "подходящей коробки нет.\n";
+            }
+            else
+            {
+                cout << "выдана коробка " << result << endl;
+            }
+
+            break;
+
+        case 3:
+            cout << "введите минимальный объем: ";
+            cin >> v;
+
+            result = stock.GetByV(v);
+
+            if (result == -1)
+            {
+                cout << "подходящей коробки нет.\n";
+            }
+            else
+            {
+                cout << "выдана коробка " << result << endl;
+            }
+
+            break;
+        }
+
+    } while (choice != 0);
+
+    return 0;
+}
